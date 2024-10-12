@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import VendingMachine from './contracts/VendingMachine.json'; // Your compiled contract JSON
+import VendingMachine from './contracts/VendingMachine.json'; // My compiled contract JSON
 import Web3 from 'web3';
 import './App.css';
 
@@ -40,12 +40,10 @@ function App() {
   async function purchaseDonuts() {
     const { contract, accounts } = state;
     const purchaseAmount = document.querySelector('#purchaseAmount').value;
-    await contract.methods
-      .purchase(purchaseAmount)
-      .send({
-        from: accounts[0],
-        value: Web3.utils.toWei((2 * purchaseAmount).toString(), 'ether'),
-      });
+    await contract.methods.purchase(purchaseAmount).send({
+      from: accounts[0],
+      value: Web3.utils.toWei((2 * purchaseAmount).toString(), 'ether'),
+    });
     window.location.reload();
   }
 
@@ -53,7 +51,8 @@ function App() {
     <>
       <h1>Vending Machine DApp</h1>
       <div className="App">
-        <p>Vending Machine Balance: {vendingBalance} donuts</p>
+        <p>Vending Machine Balance: {vendingBalance} Cold-Drinks</p>
+        <p className="Note">Note : Each Cold-Drinks cost 2 ETh</p>
 
         <div>
           <h3>Restock Vending Machine</h3>
@@ -62,7 +61,7 @@ function App() {
         </div>
 
         <div>
-          <h3>Purchase Donuts</h3>
+          <h3>Purchase Cold-Drinks</h3>
           <input type="number" id="purchaseAmount" placeholder="Amount to Purchase"></input>
           <button onClick={purchaseDonuts}>Purchase</button>
         </div>
