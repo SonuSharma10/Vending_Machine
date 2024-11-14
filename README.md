@@ -10,5 +10,3 @@ command to run
 
 #### npm start in client
 
-
-🎇
